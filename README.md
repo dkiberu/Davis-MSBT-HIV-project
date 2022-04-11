@@ -1,5 +1,5 @@
 # Simulation of clonal expansion and latent HIV reservoir size prediction using machine learning in virally suppressed individuals in Uganda
-This repository includes scripts used in mathematical modelling of the latent viral reservoir (LVR) and machine learning prediction of the LVR size using clinical data from a cohort of Ugandans living with HIV.\
+This repository includes scripts used in mathematical modelling of the latent viral reservoir (LVR) and machine learning prediction of the LVR size using clinical data from a cohort of individuals in Uganda living with HIV.\
 \
 The LVR is made up of resting cells infected by HIV in such a way that viral particles are not released and as such the immune system cannot target them. Anti-retroviral drugs (ARVs) are also unable to interrupt the LVR and upon ceasing therapy, the reservoir can be reactivated leading to rebound HIV infection. During effective therapy, the reservoir is maintained through clonal expansion, which can be homeostatic in order to preserve the number of resting cells or antigen induced so as to combat infection. Given the multiple endemic diseases in countries such as Uganda, immune activation and clonal expansion of the LVR should play a major role in the dynamics of this reservoir.\
 \
