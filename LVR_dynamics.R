@@ -11,34 +11,27 @@ library("DEoptim")
 setwd("~/Desktop/simulation/param_estimation")
 
 ## read csv file as myData
-df <-  read.csv("D21_random_effect_QVOA_subj.csv")
-head(df)
-str(df)
-
-
-df1 <- df[,c(1,2,5)]
+df1 <-  read.csv("D21_random_effect_QVOA_subj.csv")
 head(df1)
 str(df1)
 
-df2 <- df1[!is.na(df[5]),]
+
+df1 <- df1[,c(1,2,5)]
 head(df2)
 str(df2)
 
-df3 <- df2
+df3 <- df2[!is.na(df2[5]),]
+head(df3)
+str(df3)
 
-## adding mean vlaues of L at different time points as individual 1000
-y <- rbind(c(1000,0,mean(df3[df3$time==0,][3][,1])),c(1000,1,mean(df3[df3$time==1,][3][,1])),c(1000,2,mean(df3[df3$time==2,][3][,1])),c(1000,4,mean(df3[df3$time==4,][3][,1])),c(1000,5,mean(df3[df3$time==5,][3][,1])))
-colnames(y) <- colnames(df3)
-df4 <-  rbind(df3, y)
 
 ## create tab
-#wq <- rbind(bestPar1000,bestPar1000)
 final_params_all = c("beta"=0, "alpha"=0, "mu"=0)
 final_aic_all <- c(0,0)
 
 ## Loop through LVR measurements for each individual
-for (i in unique(df4$subject)) {
-  x <-data.frame(df4[df4$subject==i,][1:dim(df4[df4$subject==i,])[1],])
+for (i in unique(df3$subject)) {
+  x <-data.frame(df3[df3$subject==i,][1:dim(df3[df3$subject==i,])[1],])
   if (dim(x)[1]>=2) {
     a=1
     while (a<dim(x)) {
@@ -115,9 +108,9 @@ for (i in unique(df4$subject)) {
       # }
       
       # Defining Parameter boundaries, optimizer conditions 
-      ## boundaries transformed to log base 10 scale
+      ## parameters beta: clonal expansion rate, alpha: activation rate, mu: death rate
       lower = log(c(0.1,0.1,0.01))
-      upper = log(c(3,4,0.5))
+      upper = log(c(2,2,0.5))
       
       ## increasing number of trials (itermax and septol) and decreasing thr relative tolerance (reltol: measurement of the error relative to the size of each solution component)
       ### this forces the optimizer to work more exhaustively
