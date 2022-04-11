@@ -34,7 +34,7 @@ for (i in unique(df3$subject)) {
   x <-data.frame(df3[df3$subject==i,][1:dim(df3[df3$subject==i,])[1],])
   if (dim(x)[1]>=2) {
     a=1
-    while (a<dim(x)) {
+    while (a<dim(x)[1]) {
       reald <- (x[a:(a+1),])
       
       file_name <- paste(i,a, sep="_")
@@ -76,36 +76,6 @@ for (i in unique(df3$subject)) {
         return(rmse)
       }
       
-      # myCostFn <- function(x) {
-      #   parms <- x[1:length(myParams)]
-      #   names(parms) <- myParams
-      #   # solve ode
-      #   yhat <- ode(myStates, modelTime, myModel, 10^parms)
-      #   # check if current parameters make sense
-      #   checkBad <- function(x) {
-      #     return(any(x < 0 | is.na(x)))
-      #   }
-      #   tryCatch(
-      #     {
-      #       yhat <- ode(myStates, modelTime, myModel, 10^parms)
-      #       badSet <- checkBad(yhat)
-      #       if (badSet) {
-      #         rmse <- 1e+8
-      #         return(rmse)
-      #       } else {
-      #         yMatch <- yhat[yhat[,1] %in% reald$time, ]
-      #         nm <- rle(reald$time)$lengths
-      #         x <- reald[,myL] - rep(log10(yMatch[,myL]), times = nm)
-      #         rmse <- sqrt(mean(x^2))
-      #         return(rmse)
-      #       }
-      #         
-      #     }, error = function(e) {
-      #         rmse <- 2e+8
-      #         return(rmse)
-      #       } 
-      #     )
-      # }
       
       # Defining Parameter boundaries, optimizer conditions 
       ## parameters beta: clonal expansion rate, alpha: activation rate, mu: death rate
