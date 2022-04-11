@@ -144,14 +144,14 @@ for (i in unique(df3$subject)) {
       
       outProfiles <- myProfile(lower, upper, bestPar)
       
-      # plot profile of the first parameters
+      ## plot profile of the first parameters
       file_path <- paste("~/Desktop/simulation/param_estimation/plots/All/RMSE_all/",file_name,".jpeg", sep="")
       jpeg(filename = file_path)
       par(mfrow = c(2,2))
       sapply(1:3, function(x) plot(outProfiles[[x]], xlab=myParams[x], ylab = 'RMSE',type="b", main=paste("Subject", i, sep=" ")))
       dev.off()
       
-      # Bootstrapping parameters
+      ## Bootstrapping parameters
       myBoot <- function(numboot = 10, numpar = 3) {
         results <- matrix(NA, numboot, numpar)
         original <- reald
